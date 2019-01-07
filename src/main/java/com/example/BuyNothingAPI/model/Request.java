@@ -120,10 +120,9 @@ public class Request extends AuditModel {
         this.user = user;
     }
     
-    private Set<Match> matches = new HashSet<Match>();
-
-    
-    @OneToMany(mappedBy="request")
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,targetEntity = Match.class)
+    @JoinTable(name = "MATCHES", joinColumns = { @JoinColumn(name = "REQUEST_ID") })
+    private Set<Match> matches;
     
 	public Set<Match> getMatches() {
 		return this.matches;
@@ -132,9 +131,5 @@ public class Request extends AuditModel {
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
 	}
-	
-	public void addMatch(Match match) {
-		this.matches.add(match);
-	}  
 
 }
