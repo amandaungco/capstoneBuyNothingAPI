@@ -3,14 +3,12 @@ package com.example.BuyNothingAPI.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -29,7 +27,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Request extends AuditModel {
 	
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
     @GeneratedValue(generator = "request_generator")
     @SequenceGenerator(
             name = "request_generator",
@@ -37,14 +40,14 @@ public class Request extends AuditModel {
             initialValue = 1000
     )
     @Column(name = "REQUEST_ID", unique = true, nullable = false)
-    private Long requestId;
+    private Long id;
     
     public Long getrequestId() {
-        return requestId;
+        return id;
     }
 
     public void setrequestId(Long requestId) {
-        this.requestId = requestId;
+        this.id = id;
     }
 
     @NotBlank
@@ -120,9 +123,11 @@ public class Request extends AuditModel {
         this.user = user;
     }
     
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,targetEntity = Match.class)
-    @JoinTable(name = "MATCHES", joinColumns = { @JoinColumn(name = "REQUEST_ID") })
-    private Set<Match> matches;
+   
+    @OneToMany(mappedBy="request")
+    private Set<Match> matches = new HashSet<Match>();
+
+    
     
 	public Set<Match> getMatches() {
 		return this.matches;
@@ -131,5 +136,9 @@ public class Request extends AuditModel {
 	public void setMatches(Set<Match> matches) {
 		this.matches = matches;
 	}
+	
+	public void addMatch(Match match) {
+		this.matches.add(match);
+	}  
 
 }

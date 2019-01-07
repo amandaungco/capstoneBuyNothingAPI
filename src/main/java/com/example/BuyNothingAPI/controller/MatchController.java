@@ -20,17 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.BuyNothingAPI.exception.ResourceNotFoundException;
 import com.example.BuyNothingAPI.model.Match;
 import com.example.BuyNothingAPI.repository.MatchRepository;
-import com.example.BuyNothingAPI.repository.OfferRepository;
-import com.example.BuyNothingAPI.repository.RequestRepository;
 
 @RestController
 public class MatchController {
 
-    @Autowired
-    private OfferRepository offerRepository;
-
-    @Autowired
-    private RequestRepository requestRepository;
+//    @Autowired
+//    private OfferRepository offerRepository;
+//
+//    @Autowired
+//    private RequestRepository requestRepository;
     
     @Autowired
     private MatchRepository matchRepository;
@@ -44,7 +42,7 @@ public class MatchController {
     
 
     @GetMapping("/requests/{requestId}/matches")
-    public List<Match> getMatchsByRequestId(@PathVariable Long requestId) {
+    public List<Match> getMatchesByRequestId(@PathVariable Long requestId) {
         return matchRepository.findByRequestId(requestId);
     }
     
@@ -56,8 +54,8 @@ public class MatchController {
     
     
     @PostMapping("/matches")
-    public Match createMatch(@Valid @RequestBody Match match) {
-        return matchRepository.save(match);
+    public Match createMatch(@RequestParam int offer_id,@RequestParam int request_id) {
+        return null;
     }
 
 
@@ -66,7 +64,6 @@ public class MatchController {
                                    @Valid @RequestBody Match matchRequest) {
         return matchRepository.findById(matchId)
                 .map(match -> {
-                    match.setCreatedDate(matchRequest.getCreatedDate());
                     match.setDistance(matchRequest.getDistance());
                     return matchRepository.save(match);
                 }).orElseThrow(() -> new ResourceNotFoundException("Match not found with id " + matchId));
