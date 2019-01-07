@@ -42,11 +42,11 @@ public class Request extends AuditModel {
     @Column(name = "REQUEST_ID", unique = true, nullable = false)
     private Long id;
     
-    public Long getrequestId() {
+    public Long getId() {
         return id;
     }
 
-    public void setrequestId(Long requestId) {
+    public void setId(Long id) {
         this.id = id;
     }
 

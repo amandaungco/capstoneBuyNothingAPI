@@ -32,7 +32,13 @@ public class Match extends AuditModel {
     )
     @Column(name = "ID", unique = true, nullable = false)
 	private Long Id;
-	
+	 public Long getId() {
+	        return Id;
+	    }
+	 
+	    public void setId(Long Id) {
+	        this.Id = Id;
+	    }
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_ID")  

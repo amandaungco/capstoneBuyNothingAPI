@@ -65,9 +65,10 @@ public class MatchController {
 			newMatch.setOffer(newOffer.get());
 			newMatch.setRequest(newRequest.get());
 			matchRepository.save(newMatch);
+			newMatch.getOffer().setMatches(null);
+			newMatch.getRequest().setMatches(null);
 			return newMatch;
-			}
-		else 		{
+			}		else 		{
 			throw new Exception("Uh-oh!");
 			}
 	}
