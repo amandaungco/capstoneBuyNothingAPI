@@ -105,6 +105,8 @@ public class Match extends AuditModel {
     public void prepareForJSON(Match match) {
     	match.getOffer().setMatches(null);
     	match.getRequest().setMatches(null);
+    	match.getOffer().setExchanges(null);
+		match.getRequest().setExchanges(null);
     	
     	
     	

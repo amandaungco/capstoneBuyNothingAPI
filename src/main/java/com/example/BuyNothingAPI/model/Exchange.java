@@ -81,5 +81,7 @@ public class Exchange extends AuditModel {
 	public void prepareForJSON(Exchange exchange) {
 		exchange.getOffer().setExchanges(null);
 		exchange.getRequest().setExchanges(null);
+		exchange.getOffer().setMatches(null);
+    	exchange.getRequest().setMatches(null);
 	}
 }
