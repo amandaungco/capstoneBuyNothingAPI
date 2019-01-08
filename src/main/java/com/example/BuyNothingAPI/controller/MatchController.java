@@ -28,6 +28,7 @@ import com.example.BuyNothingAPI.model.Request;
 import com.example.BuyNothingAPI.repository.MatchRepository;
 import com.example.BuyNothingAPI.repository.OfferRepository;
 import com.example.BuyNothingAPI.repository.RequestRepository;
+import com.example.BuyNothingAPI.view.MatchAPI;
 
 @RestController
 public class MatchController {
@@ -53,20 +54,28 @@ public class MatchController {
 
 	@GetMapping("/matches")
 	public Page<Match> getMatches(Pageable pageable) {
-		return matchRepository.findAll(pageable);
+		Page <Match> matches = matchRepository.findAll(pageable);
+		for (Match match: matches) {
+			match.prepareForJSON(match);
+		}
+		return matches;
+	
 	}
 
 	@PostMapping("/matches")
-	public Match createMatch(@RequestParam Long offer_id, @RequestParam Long request_id) throws Exception {
-		Optional<Offer> newOffer = offerRepository.findById(offer_id);
-		Optional<Request> newRequest = requestRepository.findById(request_id);
+	public Match createMatch(@RequestBody MatchAPI matchApi) throws Exception {
+		Optional<Offer> newOffer = offerRepository.findById(matchApi.getOffer_id());
+		Optional<Request> newRequest = requestRepository.findById(matchApi.getRequest_id());
 		if(newOffer.isPresent()&&newRequest.isPresent()) {
 			Match newMatch = new Match();
 			newMatch.setOffer(newOffer.get());
 			newMatch.setRequest(newRequest.get());
+			newMatch.setDistance(matchApi.getDistance());
+			newMatch.setStatus(matchApi.getStatus());
 			matchRepository.save(newMatch);
 			newMatch.getOffer().setMatches(null);
 			newMatch.getRequest().setMatches(null);
+
 			return newMatch;
 			}		else 		{
 			throw new Exception("Uh-oh!");

@@ -71,6 +71,17 @@ public class Match extends AuditModel {
     public void setDistance(int distance) {
         this.distance = distance;
     }
+    
+    @Column(name = "STATUS", columnDefinition = "text")
+    private String status;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+//       
 //        
 //    public boolean equals(Object o) {
 //		if (this == o)
@@ -90,5 +101,13 @@ public class Match extends AuditModel {
 //	public int hashCode() {
 //		return (getPk() != null ? getPk().hashCode() : 0);
 //	}
-
+    
+    public void prepareForJSON(Match match) {
+    	match.getOffer().setMatches(null);
+    	match.getRequest().setMatches(null);
+    	
+    	
+    	
+    }
+// create prepare for json
 }
