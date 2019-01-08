@@ -59,7 +59,7 @@ public class Offer extends AuditModel {
 	@OneToMany(mappedBy = "offer")
 	private Set<Match> matches = new HashSet<Match>();
 
-	
+
 	public Set<Match> getMatches() {
 		return this.matches;
 	}
@@ -72,6 +72,21 @@ public class Offer extends AuditModel {
 		this.matches.add(match);
 	}  
 
+	@OneToMany(mappedBy = "offer")
+	private Set<Exchange> exchanges = new HashSet<Exchange>();
+
+
+	public Set<Exchange> getExchanges() {
+		return this.exchanges;
+	}
+
+	public void setExchanges(Set<Exchange> exchanges) {
+		this.exchanges = exchanges;
+	}
+
+	public void addExchange(Exchange exchange) {
+		this.exchanges.add(exchange);
+	}  
 	public Long getId() {
 		return id;
 	}

@@ -1,101 +1,85 @@
 package com.example.BuyNothingAPI.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import java.sql.Date;
-
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "exchanges")
 public class Exchange extends AuditModel {
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(generator = "answer_generator")
-    @SequenceGenerator(
-            name = "answer_generator",
-            sequenceName = "answer_sequence",
-            initialValue = 1000
-    )
-    private Long id;
+	@GeneratedValue(generator = "exchange_generator")
+	@SequenceGenerator(
+			name = "exchange_generator",
+			sequenceName = "exchange_sequence",
+			initialValue = 1000
+			)
+	@Column(name = "ID", unique = true, nullable = false)
+	private Long id;
+	public Long getId() {
+		return id;
+	}
 
-	 @Column(columnDefinition = "text")
-	 private Date date;
-	 
-    @Column(columnDefinition = "text")
-    private String status;
-    
-    @Column(columnDefinition = "text")
-    private int distance;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Offer_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Offer offer;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "OFFER_ID")  
+	private Offer offer;
+	public Offer getOffer() {
+		return offer;
+	}
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "Request_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Request request;
-    
-    public Long getId() {
-        return id;
-    }
+	public void setOffer(Offer offer) {
+		this.offer = offer;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "REQUEST_ID") 
+	private Request request;
+	public Request getRequest() {
+		return request;
+	}
 
-    
-    
-    public String getStatus() {
-        return status;
-    }
+	public void setRequest(Request request) {
+		this.request = request;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
- 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    
-    public int getDistance() {
-        return distance;
-    }
+	@Column(name = "DISTANCE", columnDefinition = "text")
+	private int distance;
+	public int getDistance() {
+		return distance;
+	}
 
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-        
-    public Offer getOffer() {
-        return offer;
-    }
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
 
-    public void setOffer(Offer offer) {
-        this.offer = offer;
-    }
-    public Request getRequest() {
-        return request;
-    }
+	@Column(name = "STATUS", columnDefinition = "text")
+	private String status;
+	public String getStatus() {
+		return status;
+	}
 
-    public void setRequest(Request request) {
-        this.request = request;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public void prepareForJSON(Exchange exchange) {
+		exchange.getOffer().setExchanges(null);
+		exchange.getRequest().setExchanges(null);
+	}
 }
