@@ -12,7 +12,7 @@ import com.example.BuyNothingAPI.model.Request;
 public interface RequestRepository extends JpaRepository<Request, Long> {
     List<Request> findByUserId(Long userId);
     
-    @Query("SELECT request FROM Requests requests WHERE request.title LIKE %?1% AND request.status = 'ACTIVE'")
-    List<Request>findActiveRequestsByTitle(String title);
+    @Query("SELECT request FROM Request request WHERE request.title LIKE %?1% AND request.status = 'ACTIVE'")
+    List<Request>findByTitle(String title);
     
 }
