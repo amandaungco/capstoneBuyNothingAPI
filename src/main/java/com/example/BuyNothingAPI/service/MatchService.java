@@ -45,5 +45,21 @@ public class MatchService {
 
     }
 
+    public Set<Match> findMatches(Request request) {
+        String query = request.getTitle();
+        List<Offer> matchedOffers = offerRepository.findByTitle(query);
+        Set<Match> newMatches = new HashSet<>();
+        for (Offer offer : matchedOffers) {
+            Match newMatch = new Match();
+            newMatch.setOffer(offer);
+            newMatch.setRequest(request);
+            newMatches.add(newMatch);
+        }
+        matchRepository.saveAll(newMatches);
+        return newMatches;
+
+
+    }
+
 
 }

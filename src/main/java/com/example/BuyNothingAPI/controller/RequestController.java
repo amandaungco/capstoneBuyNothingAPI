@@ -31,6 +31,7 @@ public class RequestController {
         return userRepository.findById(userId)
                 .map(user -> {
                     request.setUser(user);
+                    request.setMatches(matchService.findMatches(request));
                     return requestRepository.save(request);
                 }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
     }
