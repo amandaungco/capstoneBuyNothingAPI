@@ -24,6 +24,10 @@ public class OfferController {
     public List<Offer> getOffersByUserId(@PathVariable Long userId) {
         return offerRepository.findByUserId(userId);
     }
+    
+//    public List getOffers(@RequestParam (value = "title", required = false) String title) {
+//    	return offerRepository.findBy
+//    }
 
     @PostMapping("/users/{userId}/offers")
     public Offer addOffer(@PathVariable Long userId,
