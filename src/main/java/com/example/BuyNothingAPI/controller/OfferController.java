@@ -1,15 +1,25 @@
 package com.example.BuyNothingAPI.controller;
 
 
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.BuyNothingAPI.exception.ResourceNotFoundException;
 import com.example.BuyNothingAPI.model.Offer;
 import com.example.BuyNothingAPI.repository.OfferRepository;
 import com.example.BuyNothingAPI.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
-import java.util.List;
+import com.example.BuyNothingAPI.service.MatchService;
 
 @RestController
 public class OfferController {
@@ -19,6 +29,10 @@ public class OfferController {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+	private MatchService matchService;
+
 
     @GetMapping("/users/{userId}/offers")
     public List<Offer> getOffersByUserId(@PathVariable Long userId) {
@@ -35,6 +49,7 @@ public class OfferController {
         return userRepository.findById(userId)
                 .map(user -> {
                     offer.setUser(user);
+                    offer.setMatches(matchService.findMatches(offer));
                     return offerRepository.save(offer);
                 }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
     }

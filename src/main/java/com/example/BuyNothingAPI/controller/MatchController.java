@@ -42,6 +42,9 @@ public class MatchController {
 
 	@Autowired
 	private MatchRepository matchRepository;
+	
+	@Autowired
+	private MatchService matchService;
 
 	@GetMapping("/offers/{offerId}/matches")
 	public List<Match> getMatchesByOfferId(@PathVariable Long offerId) {
