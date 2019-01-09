@@ -1,5 +1,7 @@
 package com.example.BuyNothingAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +37,7 @@ public class Exchange extends AuditModel {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "OFFER_ID")  
 	private Offer offer;
@@ -46,6 +49,7 @@ public class Exchange extends AuditModel {
 		this.offer = offer;
 	}
 
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "REQUEST_ID") 
 	private Request request;
@@ -78,10 +82,10 @@ public class Exchange extends AuditModel {
 		this.status = status;
 	}
 
-	public void prepareForJSON(Exchange exchange) {
-		exchange.getOffer().setExchanges(null);
-		exchange.getRequest().setExchanges(null);
-		exchange.getOffer().setMatches(null);
-    	exchange.getRequest().setMatches(null);
-	}
+//	public void prepareForJSON(Exchange exchange) {
+//		exchange.getOffer().setExchanges(null);
+//		exchange.getRequest().setExchanges(null);
+//		exchange.getOffer().setMatches(null);
+//    	exchange.getRequest().setMatches(null);
+//	}
 }

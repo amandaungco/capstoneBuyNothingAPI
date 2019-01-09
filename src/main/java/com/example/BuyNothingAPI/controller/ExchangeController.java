@@ -52,9 +52,9 @@ public class ExchangeController {
 	@GetMapping("/exchanges")
 	public Page<Exchange> getExchanges(Pageable pageable) {
 		Page <Exchange> exchanges = exchangeRepository.findAll(pageable);
-		for (Exchange exchange: exchanges) {
-			exchange.prepareForJSON(exchange);
-		}
+//		for (Exchange exchange: exchanges) {
+//			exchange.prepareForJSON(exchange);
+//		}
 		return exchanges;
 	
 	}

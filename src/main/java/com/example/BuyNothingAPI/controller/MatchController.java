@@ -59,9 +59,9 @@ public class MatchController {
 	@GetMapping("/matches")
 	public Page<Match> getMatches(Pageable pageable) {
 		Page <Match> matches = matchRepository.findAll(pageable);
-		for (Match match: matches) {
-			match.prepareForJSON(match);
-		}
+//		for (Match match: matches) {
+//			match.prepareForJSON(match);
+//		}
 		return matches;
 	
 	}
@@ -79,7 +79,6 @@ public class MatchController {
 			matchRepository.save(newMatch);
 			newMatch.getOffer().setExchanges(null);
 			newMatch.getRequest().setExchanges(null);
-	
 			newMatch.getOffer().setMatches(null);
 			newMatch.getRequest().setMatches(null);
 

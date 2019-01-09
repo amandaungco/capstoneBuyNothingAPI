@@ -2,9 +2,11 @@ package com.example.BuyNothingAPI.controller;
 
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.example.BuyNothingAPI.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,6 +52,12 @@ public class OfferController {
                 .map(user -> {
                     offer.setUser(user);
                     offer.setMatches(matchService.findMatches(offer));
+                    Set<Match> offerMatches = offer.getMatches();
+                    for (Match match : offerMatches) {
+                        Match newMatch = new Match();
+                        newMatch.setRequest(null);
+                        newMatch.setOffer(null);
+                    }
                     return offerRepository.save(offer);
                 }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
     }

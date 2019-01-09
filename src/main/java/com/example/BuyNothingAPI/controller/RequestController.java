@@ -2,14 +2,17 @@ package com.example.BuyNothingAPI.controller;
 
 
 import com.example.BuyNothingAPI.exception.ResourceNotFoundException;
+import com.example.BuyNothingAPI.model.Match;
 import com.example.BuyNothingAPI.model.Request;
 import com.example.BuyNothingAPI.repository.RequestRepository;
 import com.example.BuyNothingAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.example.BuyNothingAPI.service.MatchService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class RequestController {
@@ -19,6 +22,9 @@ public class RequestController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private MatchService matchService;
 
     @GetMapping("/users/{userId}/requests")
     public List<Request> getRequestsByUserId(@PathVariable Long userId) {
@@ -32,6 +38,12 @@ public class RequestController {
                 .map(user -> {
                     request.setUser(user);
                     request.setMatches(matchService.findMatches(request));
+                    Set<Match> requestMatches = request.getMatches();
+                    for (Match match : requestMatches) {
+                        Match newMatch = new Match();
+                        newMatch.setRequest(null);
+                        newMatch.setOffer(null);
+                    }
                     return requestRepository.save(request);
                 }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
     }

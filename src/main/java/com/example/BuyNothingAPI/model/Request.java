@@ -143,7 +143,6 @@ public class Request extends AuditModel {
 	@OneToMany(mappedBy = "offer")
 	private Set<Exchange> exchanges = new HashSet<Exchange>();
 
-
 	public Set<Exchange> getExchanges() {
 		return this.exchanges;
 	}
@@ -154,6 +153,14 @@ public class Request extends AuditModel {
 
 	public void addExchange(Exchange exchange) {
 		this.exchanges.add(exchange);
-	}  
+	}
 
-}
+//	public void prepareForJSON(Request request) {
+//		request.getOffer().setMatches(null);
+//		request.getRequest().setMatches(null);
+//		request.getOffer().setExchanges(null);
+//		request.getRequest().setExchanges(null);
+
+
+
+	}
