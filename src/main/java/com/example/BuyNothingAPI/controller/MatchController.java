@@ -77,10 +77,10 @@ public class MatchController {
 			newMatch.setDistance(matchApi.getDistance());
 			newMatch.setStatus(matchApi.getStatus());
 			matchRepository.save(newMatch);
-			newMatch.getOffer().setExchanges(null);
-			newMatch.getRequest().setExchanges(null);
-			newMatch.getOffer().setMatches(null);
-			newMatch.getRequest().setMatches(null);
+//			newMatch.getOffer().setExchanges(null);
+//			newMatch.getRequest().setExchanges(null);
+//			newMatch.getOffer().setMatches(null);
+//			newMatch.getRequest().setMatches(null);
 
 			return newMatch;
 			}		else 		{

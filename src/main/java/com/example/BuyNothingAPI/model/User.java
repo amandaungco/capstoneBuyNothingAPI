@@ -29,6 +29,9 @@ public class User extends AuditModel {
     @Column(columnDefinition = "text")
     private String location;
 
+    @Column(columnDefinition = "text")
+    private String email;
+
 
     public Long getId() {
         return id;
@@ -52,6 +55,14 @@ public class User extends AuditModel {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 

@@ -53,7 +53,10 @@ public class MatchService {
             Match newMatch = new Match();
             newMatch.setOffer(offer);
             newMatch.setRequest(request);
+            newMatch.setStatus("Active");
+            newMatch.setDistance(3);
             newMatches.add(newMatch);
+
         }
         matchRepository.saveAll(newMatches);
         return newMatches;

@@ -36,6 +36,7 @@ public class UserController {
                 .map(user -> {
                     user.setName(userRequest.getName());
                     user.setLocation(userRequest.getLocation());
+                    user.setEmail(userRequest.getEmail());
                     return userRepository.save(user);
                 }).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
     }
