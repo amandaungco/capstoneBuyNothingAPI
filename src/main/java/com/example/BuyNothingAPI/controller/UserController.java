@@ -29,6 +29,8 @@ public class UserController {
         return userRepository.save(user);
     }
 
+    //if the user signs in with an existing user, new user doesnt get created, find instance of user based on email in database and return user information in the database
+
     @PutMapping("/users/{userId}")
     public User updateUser(@PathVariable Long userId,
                                    @Valid @RequestBody User userRequest) {

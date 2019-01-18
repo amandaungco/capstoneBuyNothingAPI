@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users",   uniqueConstraints = @UniqueConstraint(columnNames = { "email" })  )
 public class User extends AuditModel {
     /**
 	 * 
@@ -23,13 +23,14 @@ public class User extends AuditModel {
     private Long id;
 
     @NotBlank
-    @Size(min = 3, max = 100)
+    @Size(min = 3, max = 100, message="Name must be between 3-100 characters.")
     private String name;
 
     @Column(columnDefinition = "text")
     private String location;
 
-    @Column(columnDefinition = "text")
+    @NotBlank( message = "Another user with that email exists in the system. Email must be unique")
+    @Column(unique=true)
     private String email;
 
 

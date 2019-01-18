@@ -108,6 +108,18 @@ public class Request extends AuditModel {
 		this.distance = distance;
 	}
 
+
+	@Column(columnDefinition = "text")
+	private String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "requester_id", nullable = false)
 	@OnDelete(action = OnDeleteAction.CASCADE)
