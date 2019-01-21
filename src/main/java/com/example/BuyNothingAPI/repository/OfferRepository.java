@@ -15,4 +15,7 @@ public interface OfferRepository extends JpaRepository<Offer, Long> {
 
     @Query("SELECT offer FROM  Offer offer WHERE offer.title LIKE %?1% AND offer.status = 'ACTIVE'")
     List<Offer>findByTitle(String title);
+
+//    @Query("SELECT offer FROM  Offer offer WHERE offer.id LIKE %?1% ")
+//    List<Offer>findByOfferId(int id);
 }

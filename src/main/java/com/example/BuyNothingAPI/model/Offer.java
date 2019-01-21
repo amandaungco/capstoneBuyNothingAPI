@@ -1,6 +1,8 @@
 package com.example.BuyNothingAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -14,6 +16,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "offers")
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id")
 public class Offer extends AuditModel {
 	/**
 	 * 

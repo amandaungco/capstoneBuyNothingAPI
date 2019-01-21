@@ -40,7 +40,12 @@ public class OfferController {
     public List<Offer> getOffersByUserId(@PathVariable Long userId) {
         return offerRepository.findByUserId(userId);
     }
-    
+//
+//    @GetMapping("/users/{userId}/offers/{offerId}")
+//    public List<Offer> getSingleOfferByOfferId(@PathVariable Long userId) {
+//        return offerRepository.findByOfferId(offer);
+//    }
+
 //    public List getOffers(@RequestParam (value = "title", required = false) String title) {
 //    	return offerRepository.findBy
 //    }

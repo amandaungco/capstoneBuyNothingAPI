@@ -1,6 +1,8 @@
 package com.example.BuyNothingAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.Date;
 
@@ -18,6 +20,9 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "matches")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 
 public class Match extends AuditModel {
     /**
@@ -42,7 +47,7 @@ public class Match extends AuditModel {
 	        this.Id = Id;
 	    }
 
-	@JsonIgnore
+//	@JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_ID")  
     private Offer offer;
@@ -54,7 +59,7 @@ public class Match extends AuditModel {
         this.offer = offer;
     }
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "REQUEST_ID") 
     private Request request;

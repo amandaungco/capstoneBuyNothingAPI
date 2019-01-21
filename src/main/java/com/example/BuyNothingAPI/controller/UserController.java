@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -19,9 +21,21 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public Page<User> getUsers(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    @ResponseBody
+
+    public List<User> getUser(@RequestParam(required = false) String email) {
+
+
+
+        if (email !=null) {
+          return userRepository.findByEmail(email);
+
+        } else {
+           return userRepository.findAll();
+        }
+
     }
+
 
 
     @PostMapping("/users")
