@@ -8,6 +8,8 @@ import javax.validation.Valid;
 
 import com.example.BuyNothingAPI.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +42,13 @@ public class OfferController {
     public List<Offer> getOffersByUserId(@PathVariable Long userId) {
         return offerRepository.findByUserId(userId);
     }
-//
+
+    @GetMapping("/offers")
+    public Page<Offer> getOffers(Pageable pageable) {
+        Page <Offer> offers = offerRepository.findAll(pageable);
+        return offers;
+
+    }
 //    @GetMapping("/users/{userId}/offers/{offerId}")
 //    public List<Offer> getSingleOfferByOfferId(@PathVariable Long userId) {
 //        return offerRepository.findByOfferId(offer);

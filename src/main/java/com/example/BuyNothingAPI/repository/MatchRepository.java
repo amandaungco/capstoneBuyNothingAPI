@@ -11,4 +11,5 @@ import com.example.BuyNothingAPI.model.Match;
 public interface MatchRepository extends JpaRepository<Match, Long> {
     List<Match> findByOfferId(Long offerId);
     List<Match> findByRequestId(Long requestId);
+//    List<Match> findByMatchId(Long matchId);
 }

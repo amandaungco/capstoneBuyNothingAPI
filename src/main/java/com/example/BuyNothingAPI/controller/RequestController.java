@@ -8,6 +8,8 @@ import com.example.BuyNothingAPI.repository.RequestRepository;
 import com.example.BuyNothingAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.BuyNothingAPI.service.MatchService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -29,6 +31,15 @@ public class RequestController {
     @GetMapping("/users/{userId}/requests")
     public List<Request> getRequestsByUserId(@PathVariable Long userId) {
         return requestRepository.findByUserId(userId);
+    }
+
+    @GetMapping("/requests")
+    public Page<Request> getRequests(Pageable pageable) {
+        Page<Request> requests = requestRepository.findAll(pageable);
+//		for (Match match: matches) {
+//			match.prepareForJSON(match);
+//		}
+        return requests;
     }
 
     @PostMapping("/users/{userId}/requests")
