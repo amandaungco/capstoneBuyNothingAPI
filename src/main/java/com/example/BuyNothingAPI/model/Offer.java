@@ -155,4 +155,11 @@ public class Offer extends AuditModel {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public void prepareForJSON(Offer offer) {
+		offer.setMatches(null);
+		offer.setExchanges(null);
+	}
+
+
 }

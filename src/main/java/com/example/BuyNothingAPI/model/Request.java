@@ -172,6 +172,11 @@ public class Request extends AuditModel {
 		this.exchanges.add(exchange);
 	}
 
+	public void prepareForJSON(Request request) {
+		request.setMatches(null);
+		request.setExchanges(null);
+	}
+
 //	public void prepareForJSON(Request request) {
 //		request.getOffer().setMatches(null);
 //		request.getRequest().setMatches(null);

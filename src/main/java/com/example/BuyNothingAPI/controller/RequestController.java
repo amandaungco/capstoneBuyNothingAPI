@@ -36,9 +36,9 @@ public class RequestController {
     @GetMapping("/requests")
     public Page<Request> getRequests(Pageable pageable) {
         Page<Request> requests = requestRepository.findAll(pageable);
-//		for (Match match: matches) {
-//			match.prepareForJSON(match);
-//		}
+		for (Request request: requests) {
+			request.prepareForJSON(request);
+		}
         return requests;
     }
 

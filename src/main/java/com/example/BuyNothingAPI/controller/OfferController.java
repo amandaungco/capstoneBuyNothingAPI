@@ -46,6 +46,9 @@ public class OfferController {
     @GetMapping("/offers")
     public Page<Offer> getOffers(Pageable pageable) {
         Page <Offer> offers = offerRepository.findAll(pageable);
+        for (Offer offer: offers) {
+			offer.prepareForJSON(offer);
+		}
         return offers;
 
     }
