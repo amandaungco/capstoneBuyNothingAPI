@@ -18,28 +18,28 @@ import com.example.BuyNothingAPI.model.User;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UserRepositoryTest {
-	
+
 	@Autowired
 	private TestEntityManager entityManager;
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Test
 	public void getUser_from_repository() {
 		User amanda = new User();
 		amanda.setName("Amanda");
-		
+
 		entityManager.persist(amanda);
 		entityManager.flush();
-		
+
 		Optional <User> userOption = userRepository.findById(amanda.getId());
 		assertThat(userOption).isNotEmpty();
-		
+
 		if (userOption.isPresent()) {
 			User foundUser = userOption.get();
 			assertThat(amanda.getId()).isEqualTo(foundUser.getId());
-		} 
+		}
 		
 		
 		

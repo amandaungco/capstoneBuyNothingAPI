@@ -74,6 +74,7 @@ public class RequestController {
                     request.setCategory(requestRequest.getCategory());
                     request.setQuantity(requestRequest.getQuantity());
                     request.setDistance(requestRequest.getDistance());
+                    request.setImageUrl(requestRequest.getImageUrl());
                     return requestRepository.save(request);
                 }).orElseThrow(() -> new ResourceNotFoundException("Request not found with id " + requestId));
     }

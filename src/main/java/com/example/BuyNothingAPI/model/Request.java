@@ -113,6 +113,16 @@ public class Request extends AuditModel {
 		this.distance = distance;
 	}
 
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	@Column(name = "IMAGEURL")
+	private String imageUrl;
 
 	@Column(columnDefinition = "text")
 	private String description;

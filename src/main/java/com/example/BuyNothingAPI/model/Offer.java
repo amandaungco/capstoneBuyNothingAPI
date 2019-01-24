@@ -38,6 +38,9 @@ public class Offer extends AuditModel {
 	@Size(min = 3, max = 100)
 	private String title;
 
+	@Column(name = "IMAGEURL")
+	private String imageUrl;
+
 	@Column(columnDefinition = "text")
 	private String status;
 
@@ -154,6 +157,14 @@ public class Offer extends AuditModel {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public void prepareForJSON(Offer offer) {

@@ -93,6 +93,7 @@ public class OfferController {
                     offer.setCategory(offerRequest.getCategory());
                     offer.setQuantity(offerRequest.getQuantity());
                     offer.setDistance(offerRequest.getDistance());
+                    offer.setImageUrl(offerRequest.getImageUrl());
                     offer.setDescription(offerRequest.getDescription());
                     return offerRepository.save(offer);
                 }).orElseThrow(() -> new ResourceNotFoundException("Offer not found with id " + offerId));
