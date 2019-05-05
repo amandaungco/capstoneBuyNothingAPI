@@ -120,19 +120,11 @@ DELETE /matches/{matchId}
 ## Installation
 
 To download and edit this project: 
-1. [Download Android Studio](https://developer.android.com/studio/)
-2. Clone this repository:
+1.  Clone this repository:
 ```
-git clone https://github.com/amandaungco/BuyNothingMatcherApp.git
+git clone https://github.com/amandaungco/capstoneBuyNothingAPI.git
 ```
-3. Open Android Studio and select Import Project, then choose the folder into which you cloned this repo.
-Connect an Android phone running Android Nougat (APK 23) or higher to your computer. (You can also use an emulator to run the app on a virtual device).
+2. Run ```mvn install``` to install dependencies.
 
-4. Click the green Run button in the menu bar and select the device you plugged in to build the project and install the app on your phone. The app should open automatically.
+3. From the root directory ```mvn spring-boot:run``` to start the server.
 
-5. In order to get full functionality the backend API will need to also be cloned and running, please see [Buy Nothing API](https://github.com/amandaungco/capstoneBuyNothingAPI).
-
-## Credits
-
- * Swipecards base by https://github.com/Diolor/Swipecards
- * Image Assistance by https://github.com/bumptech/glide
