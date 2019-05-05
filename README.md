@@ -2,8 +2,10 @@
 
 This is a Java/SpringBoot API connected to a Postgres Database.
 
+See https://github.com/amandaungco/BuyNothingMatcherApp for the mobile App/Interface.
+
 ## Functionality
-This API comes pre-packaged with the functionality that the MVP will require. The following endpoints are impemented, based off of the MVP requirements of the Capstone Project.
+These are the API endpoints based on the MVP requirements for the capstone.
 
 ### Users
 
