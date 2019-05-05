@@ -72,7 +72,7 @@ Delete an existing offer
 DELETE /users/{userId}/requests/{requestId}
 ```
 
-###Exchanges
+### Exchanges
 
 List of all exchanges
 ```
@@ -93,7 +93,7 @@ Delete an existing exchange
 ```
 DELETE /exchanges/{exchangeId}
 ```
-###Matches
+### Matches
 
 List of all matches
 ```
